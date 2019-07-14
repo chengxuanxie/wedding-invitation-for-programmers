@@ -4,25 +4,15 @@ export default {
 // 今天心情好
 // 我给你表演写代码
 // 我要开始写啦
-const { 😆, 🤗 } = 🌎;
-😆.say('嫁给我吧!❤️');
-🤗.response('好的，只要你请我吃🍉！');
-Utils.marry(😆,🤗);
-Utils.generateInvitation(😆,🤗);
+const { 👦, 👧 } = 🌎;
+👦.say('嫁给我吧!❤️');
+👧.response('好的，只要你请我吃🍉！');
+Utils.marry(👦,👧);
+Utils.generateInvitation(👦,👧);
 // 好了我写完了
 // 我要开始运行啦`,
   executions: [{
-    name:'初始化',
-    time: '',
-    duration: 0,
-    visible: false
-  }, {
-    name:'解压中',
-    time: '',
-    duration: 0,
-    visible: false
-  }, {
-    name:'组装中',
+    name:'编译中',
     time: '',
     duration: 0,
     visible: false
@@ -42,7 +32,7 @@ Utils.generateInvitation(😆,🤗);
     duration: 0,
     visible: false
   }, {
-    name:'编译中...',
+    name:'发布中...',
     time: '',
     visible: false
   }],

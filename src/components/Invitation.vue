@@ -4,11 +4,11 @@
       <div class="invitation-cover">
         <div class="cover-content" :class="{'invitation-up':isOpening}">
           <div class="content-inside">
-            <img class="content-inside-photo" src="../images/photo.jpg">
+            <img class="content-inside-photo" src="../images/6Z6A7717.jpg">
             <p>我们结婚啦！</p>
-            <p><b>Jun & undefined</b></p>
-            <p>时间：invalid date value</p>
-            <p>地点：<b>location can not be found</b></p>
+            <p><b>谢成炫 & 黄梦祎 </b></p>
+            <p>时间：2019年8月24日</p>
+            <p>地点：<b>福建省龙岩市新罗区适中镇中颜小区福满楼酒家</b></p>
             <input
               class="content-inside-input"
               placeholder="轻触写下祝福，按回车发送" 
@@ -48,12 +48,12 @@ export default {
     // 发送弹幕
     sendBarrage(){
       this.$nextTick(() => {
-        this.hasEntered = true
+        this.hasEntered = true;
         if (!this.wish) {
           return
         }
-        this.isOpening = false
-        this.$refs.wishInput.blur()
+        this.isOpening = false;
+        this.$refs.wishInput.blur();
         setTimeout(() => {
           this.$emit('sendBarrage', this.wish)
         }, 660)
