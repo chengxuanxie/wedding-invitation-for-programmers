@@ -12,6 +12,27 @@
       <strong>We're sorry but wedding-invitation-for-programmers doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
+    <audio id="music_mp3_0" src="http://music.163.com/song/media/outer/url?id=229090.mp3">
+      您的浏览器不支持 audio 标签。
+    </audio>
     <!-- built files will be auto injected -->
+  <script>
+      //--创建页面监听，页面加载完毕--触发音频播放
+      document.addEventListener('DOMContentLoaded', function () {
+          function audioAutoPlay() {
+              var musicEle0 = document.getElementById('music_mp3_0');
+              musicEle0.play();
+          }
+          audioAutoPlay();
+      });
+      //--创建触摸监听，当浏览器打开页面时，触摸屏幕触发事件，进行音频播放
+      document.addEventListener('touchstart', function () {
+          function audioAutoPlay() {
+              var musicEle0 = document.getElementById('music_mp3_0');
+              musicEle0.play();
+          }
+          audioAutoPlay();
+      });
+  </script>
   </body>
 </html>
