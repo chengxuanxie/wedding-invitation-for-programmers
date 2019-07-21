@@ -95,10 +95,21 @@
       // 发送弹幕之后
       onAfterSending(wish) {
         this.wish = wish
-        this.canOpen = false
+        this.canOpen = false;
+        this.requestComment();
         setTimeout(() => {
           this.canStart = true
         }, 800)
+      },
+      requestComment(){
+          axios
+              .get('localhost:8081/rest/comment')
+              .then(response => (
+                  console.log(response)
+              ))
+              .catch(function (error) { // 请求失败处理
+                  console.log(error);
+              });
       }
     }
   }
