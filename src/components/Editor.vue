@@ -13,7 +13,7 @@
     </pre>
     <Executions :canExecute="canExecute" @onUpdating="scrollToBottom" @onFinish="canOpen = true"/>
     <invitation :canOpen="canOpen" @sendBarrage="onAfterSending"/>
-    <Barrage :wish="wish" :canStart="canStart"/>
+    <Barrage :wish="wish" :canStart="canStart" :barrage="barrage"/>
   </div>
 </template>
 
@@ -39,7 +39,8 @@
         canExecute: false,
         canOpen: false,
         wish: '',
-        canStart: false
+        canStart: false,
+        barrage: []
       }
     },
     created() {
@@ -102,11 +103,16 @@
         }, 800)
       },
       requestComment(){
+          let barrage = this.barrage;
           axios
-              .get('localhost:8081/rest/comment')
-              .then(response => (
-                  console.log(response)
-              ))
+              .get('/rest/comment')
+              .then(function (response) {
+                  let data = response.data;
+                  for(var i in data){
+                      barrage.push(data[i].comment)
+                  }
+                  console.log(barrage)
+              })
               .catch(function (error) { // 请求失败处理
                   console.log(error);
               });

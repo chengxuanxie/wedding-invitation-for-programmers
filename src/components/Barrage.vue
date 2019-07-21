@@ -19,13 +19,12 @@
 </template>
 
 <script>
-  import data from '../mock/data'
 
   export default {
-    props: ['wish', 'canStart'],
+    props: ['wish', 'canStart', 'barrage'],
     data(){
       return {
-        barrages: data.barrages,
+        barrages: this.barrage,
         animationStyle:'',
         initialOffset: 0
       }
