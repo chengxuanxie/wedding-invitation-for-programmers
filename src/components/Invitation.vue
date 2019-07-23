@@ -7,18 +7,48 @@
             <img class="content-inside-photo" src="../images/6Z6A7717.jpg">
             <p>我们结婚啦！</p>
             <p><b>谢成炫 & 黄梦祎 </b></p>
-            <p>时间：2019年8月24日</p>
-            <p>地点：<b>福建省龙岩市新罗区适中镇中颜小区福满楼酒家</b></p>
+            <div v-if="location == 'FUMANLOU'">
+              <p >时间：2019年8月24日</p>
+              <p>地点：龙岩市适中镇中颜小区<b>福满楼酒家</b></p>
+            </div>
+            <div v-if="location == 'ZHONGYUAN'">
+            <p >时间：2019年8月26日</p>
+              <p>地点：龙岩市新罗区<b>中元大酒店</b></p>
+            </div>
+            <label>是否可以参加：</label>
+            <select name="public-choice" v-model="couponSelected" @change="getCouponSelected">
+              <option :value="coupon.id" v-for="coupon in couponList" :key="coupon.id" >{{coupon.name}}</option>
+            </select>
+            <input v-show="couponSelected != 'NOATTEND'"
+                   class="content-inside-input"
+                   placeholder="您的姓名"
+                   v-model="name"
+                   @focus="isFocused = true"
+            >
+            <input v-show="couponSelected != 'NOATTEND'"
+                   class="content-inside-input"
+                   v-model="wechatId"
+                   placeholder="请输入您的联系方式"
+                   @focus="isFocused = true"
+            >
             <input
               class="content-inside-input"
-              placeholder="轻触写下祝福，按回车发送" 
-              @keyup.enter="sendBarrage"
-              @focus="isFocused = true"
+              placeholder="轻触写下祝福，按回车发送"
               @blur="isFocused = false, hasEntered = false"
               v-model="wish"
               ref="wishInput"
             >
-            <p v-if="!wish && isFocused && hasEntered">请输入祝福哦</p>
+            <button type="button"
+                    v-bind:disabled="!wish"
+                    v-on:click="sendBarrage()"
+                    v-show="couponSelected == 'NOATTEND'"
+                    style="float: right">发送祝福</button>
+            <button type="button"
+                    v-bind:disabled="!name && !wechatId"
+                    v-on:click="sendBarrage()"
+                    v-show="couponSelected != 'NOATTEND'"
+                    style="float: right">发送预约</button>
+
           </div>
         </div>
         <div class="cover-inside-left" :class="{'opening':isOpening}"></div>
@@ -30,14 +60,24 @@
 </template>
 
 <script>
+/* eslint-disable */
+import utils from '../utils/utils'
+let location=utils.getUrlKey('location');
+location = location?location:'FUMANLOU';
+console.log(location)
 export default {
   props: ['canOpen'],
   data() {
     return {
       isOpening: false,
       wish: '',
+      wechatId: '',
+      name: '',
       isFocused: false,
-      hasEntered: false
+      hasEntered: false,
+      couponList: [{name:'8月24日福满楼酒家',id:'FUMANLOU'},{name:'8月26日中元大酒店',id:'ZHONGYUAN'},{name:'无法出席',id:'NOATTEND'}],
+      couponSelected: location?location:'FUMANLOU',
+      location: location
     }
   },
   methods: {
@@ -54,11 +94,52 @@ export default {
         }
         this.isOpening = false;
         this.$refs.wishInput.blur();
+        this.reply();
         setTimeout(() => {
           this.$emit('sendBarrage', this.wish)
         }, 660)
       })
-    }
+    },
+    getCouponSelected(){
+        this.location = this.couponSelected;
+        console.log(this.location);
+    },
+      sendComment(id){
+
+          axios
+              .put('/rest/comment',{guestId:id,comment:this.wish})
+              .then(function (response) {
+                  let data = response.data;
+                  for(var i in data){
+                      barrage.push(data[i].comment)
+                  }
+                  console.log(barrage)
+              })
+              .catch(function (error) { // 请求失败处理
+                  console.log(error);
+              });
+      },
+      reply(){
+        let name = this.name;
+        let wechaId = this.wechatId;
+        let couponSelected = this.couponSelected;
+        if(!name && !wechaId){
+            return;
+        }
+        var sendComment = this.sendComment
+          axios
+              .put('/rest/guest',{
+                  "name":name,
+                  "wechatId": wechaId,
+                  "attend": couponSelected
+              })
+              .then(function (response) {
+                  sendComment(response.data.retMsg);
+              })
+              .catch(function (error) { // 请求失败处理
+                  console.log(error);
+              });
+      }
   }
 }
 </script>
