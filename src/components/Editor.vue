@@ -98,12 +98,11 @@
         this.wish = wish
         this.canOpen = false;
         this.requestComment();
-        setTimeout(() => {
-          this.canStart = true
-        }, 800)
+
       },
       requestComment(){
           let barrage = this.barrage;
+          let start = this.start;
           axios
               .get('/rest/comment')
               .then(function (response) {
@@ -111,11 +110,17 @@
                   for(var i in data){
                       barrage.push(data[i].comment)
                   }
+                  start();
                   console.log(barrage)
               })
               .catch(function (error) { // 请求失败处理
                   console.log(error);
               });
+      },
+      start(){
+          setTimeout(() => {
+              this.canStart = true
+          }, 800)
       }
     }
   }

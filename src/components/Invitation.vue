@@ -44,7 +44,7 @@
                     v-show="couponSelected == 'NOATTEND'"
                     style="float: right">发送祝福</button>
             <button type="button"
-                    v-bind:disabled="!name && !wechatId"
+                    v-bind:disabled="!name || !wechatId"
                     v-on:click="sendBarrage()"
                     v-show="couponSelected != 'NOATTEND'"
                     style="float: right">发送预约</button>
@@ -123,7 +123,7 @@ export default {
         let name = this.name;
         let wechaId = this.wechatId;
         let couponSelected = this.couponSelected;
-        if(!name && !wechaId){
+        if(!name || !wechaId){
             return;
         }
         var sendComment = this.sendComment
