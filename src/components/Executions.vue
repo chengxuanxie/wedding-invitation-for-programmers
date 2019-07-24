@@ -5,7 +5,7 @@
       <span class="addon">~</span>
       [<span class="time">{{ execution.time }}</span>]
       <span class="task">{{ execution.name }}</span>
-      <span class="duration" v-if="execution.duration!==undefined">{{ execution.duration }} ms</span>
+      <!--<span class="duration" v-if="execution.duration!==undefined">{{ execution.duration }} ms</span>-->
     </p>
     <!--进度条-->
     <p class="code" v-show="isProcessed">
@@ -34,7 +34,7 @@
         isFinished: false,
         progressBarText: '--------------------------',
         endExecution: {
-          name:'...',
+          name:'💌...',
           time: '',
           visible: false
         }

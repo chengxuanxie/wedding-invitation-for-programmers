@@ -1,13 +1,13 @@
 export default {
   code: 
-`这首歌，
-纪念我们相识
-这段代码，
-纪念我们一起步入婚姻的殿堂
-//✍️……
-const { 👦, 👧 } = 🌎;
-Utils.marry(👦,👧);
-Utils.generateInvitation(👦,👧);`,
+`
+祎：
+    这首歌，
+    纪念初识的我们
+    这段小程序
+    纪录此刻的幸福
+    余生请多指教{👦,👧}
+                    ——炫`,
   executions: [{
     name:'📮..',
     time: '',
