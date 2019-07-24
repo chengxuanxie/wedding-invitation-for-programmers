@@ -1,14 +1,13 @@
 export default {
   code: 
-`
-👦：“亲爱的，你愿意嫁给我吗!❤🌹💍”
-👧：“我愿意！❤”
-👦：“那我去给大家发请帖啦~🤩”
+`这首歌，
+纪念我们相识
+这段代码，
+纪念我们一起步入婚姻的殿堂
 //✍️……
 const { 👦, 👧 } = 🌎;
 Utils.marry(👦,👧);
-Utils.generateInvitation(👦,👧);
-//写好了开始发送~`,
+Utils.generateInvitation(👦,👧);`,
   executions: [{
     name:'📮..',
     time: '',
