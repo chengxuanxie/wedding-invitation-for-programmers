@@ -71,7 +71,7 @@
 import utils from '../utils/utils'
 let location=utils.getUrlKey('location');
 location = location?location:'FUMANLOU';
-console.log(location)
+
 export default {
   props: ['canOpen'],
   data() {
@@ -105,14 +105,14 @@ export default {
       setTimeout(this.showImage=true,0);
     },
     beforeEnter(){
-        console.log('bbbbb');
+
         var show = this.show;
         setTimeout(()=>{
             show(false);
         },3000)
     },
     afterLeave(){
-        console.log('aaaaa');
+
         this.change();
         this.show(true);
     },
@@ -121,7 +121,7 @@ export default {
     },
     change(){
         this.currentImage = (this.currentImage+1)%this.images.length;
-        console.log(this.currentImage)
+
     },
     rolling(){
         var change = this.change;
@@ -148,7 +148,7 @@ export default {
     },
     getCouponSelected(){
         this.location = this.couponSelected;
-        console.log(this.location);
+
     },
       sendComment(id){
 
@@ -159,10 +159,10 @@ export default {
                   for(var i in data){
                       barrage.push(data[i].comment)
                   }
-                  console.log(barrage)
+
               })
               .catch(function (error) { // 请求失败处理
-                  console.log(error);
+
               });
       },
       reply(){
@@ -183,7 +183,7 @@ export default {
                   sendComment(response.data.retMsg);
               })
               .catch(function (error) { // 请求失败处理
-                  console.log(error);
+
               });
       }
   }
