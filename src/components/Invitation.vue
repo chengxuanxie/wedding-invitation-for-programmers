@@ -4,7 +4,14 @@
       <div class="invitation-cover">
         <div class="cover-content" :class="{'invitation-up':isOpening}">
           <div class="content-inside">
-            <img class="content-inside-photo" src="../images/6Z6A7717.jpg">
+              <div v-for="(item,index) in images"
+                   :key="index"
+                   v-show="index+1 == currentImage + 1">
+                  <transition name="fade" @before-enter='beforeEnter' @after-leave="afterLeave">
+                  <img :src="item.src" v-show="showImage">
+                  </transition>
+              </div>
+
             <p>我们结婚啦！</p>
             <p><b>谢成炫 & 黄梦祎 </b></p>
             <div v-if="location == 'FUMANLOU'">
@@ -15,7 +22,7 @@
             <p >时间：2019年8月26日</p>
               <p>地点：龙岩市新罗区<b>中元大酒店</b></p>
             </div>
-            <label>是否可以参加：</label>
+            <label>邀请您出席：</label>
             <select name="public-choice" v-model="couponSelected" @change="getCouponSelected">
               <option :value="coupon.id" v-for="coupon in couponList" :key="coupon.id" >{{coupon.name}}</option>
             </select>
@@ -69,6 +76,15 @@ export default {
   props: ['canOpen'],
   data() {
     return {
+      images: [{src:require('../images/A1.jpg'),id:1},
+          {src:require('../images/A2.jpg'),id:2},
+          {src:require('../images/A3.jpg'),id:3},
+          {src:require('../images/A4.jpg'),id:4},
+          {src:require('../images/A5.jpg'),id:5},
+          {src:require('../images/A6.jpg'),id:6},
+          {src:require('../images/A7.jpg'),id:7},
+          {src:require('../images/A8.jpg'),id:8},
+          {src:require('../images/A9.jpg'),id:9}],
       isOpening: false,
       wish: '',
       wechatId: '',
@@ -77,13 +93,43 @@ export default {
       hasEntered: false,
       couponList: [{name:'8月24日福满楼酒家',id:'FUMANLOU'},{name:'8月26日中元大酒店',id:'ZHONGYUAN'},{name:'无法出席',id:'NOATTEND'}],
       couponSelected: location?location:'FUMANLOU',
-      location: location
+      location: location,
+      currentImage:0,
+      showImage:false
     }
   },
   methods: {
     // 打开邀请函
     openInvitation(){
       this.isOpening = true
+      setTimeout(this.showImage=true,0);
+    },
+    beforeEnter(){
+        console.log('bbbbb');
+        var show = this.show;
+        setTimeout(()=>{
+            show(false);
+        },3000)
+    },
+    afterLeave(){
+        console.log('aaaaa');
+        this.change();
+        this.show(true);
+    },
+    show(t){
+        this.showImage = t;
+    },
+    change(){
+        this.currentImage = (this.currentImage+1)%this.images.length;
+        console.log(this.currentImage)
+    },
+    rolling(){
+        var change = this.change;
+        var rolling = this.rolling;
+        setTimeout(() => {
+            change();
+            rolling();
+        }, 6000)
     },
     // 发送弹幕
     sendBarrage(){
@@ -289,4 +335,13 @@ export default {
       }
     }
   }
+
+  .fade-enter-active, .fade-leave-active {
+      transition: opacity 2s
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active, 2.1.8 版本以下 */ {
+      opacity: 0
+  }
+
+
 </style>
