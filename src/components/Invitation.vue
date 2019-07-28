@@ -15,8 +15,8 @@
             <p>我们结婚啦！</p>
             <p><b>谢成炫 & 黄梦祎 </b></p>
             <div v-if="location == 'FUMANLOU'">
-              <p >时间：2019年8月24日</p>
-              <p>地点：龙岩市适中镇中颜小区<b>福满楼酒家</b></p>
+              <p >时间: 2019年8月24日</p>
+              <p>地点: 龙岩市适中镇中颜小区<b>福满楼</b></p>
             </div>
             <div v-if="location == 'ZHONGYUAN'">
             <p >时间：2019年8月26日</p>
@@ -109,7 +109,7 @@ export default {
         var show = this.show;
         setTimeout(()=>{
             show(false);
-        },3000)
+        },2500)
     },
     afterLeave(){
 
