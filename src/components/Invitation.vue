@@ -151,7 +151,6 @@ export default {
 
     },
       sendComment(id){
-
           axios
               .put('/rest/comment',{guestId:id,comment:this.wish})
               .then(function (response) {
@@ -170,9 +169,10 @@ export default {
         let wechaId = this.wechatId;
         let couponSelected = this.couponSelected;
         if(!name || !wechaId){
+            sendComment('1000')
             return;
         }
-        var sendComment = this.sendComment
+        var sendComment = this.sendComment;
           axios
               .put('/rest/guest',{
                   "name":name,
@@ -183,7 +183,7 @@ export default {
                   sendComment(response.data.retMsg);
               })
               .catch(function (error) { // 请求失败处理
-                  sendComment('1000')
+
               });
       }
   }
