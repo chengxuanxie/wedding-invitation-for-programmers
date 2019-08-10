@@ -168,11 +168,11 @@ export default {
         let name = this.name;
         let wechaId = this.wechatId;
         let couponSelected = this.couponSelected;
+        var sendComment = this.sendComment;
         if(!name || !wechaId){
             sendComment('1000')
             return;
         }
-        var sendComment = this.sendComment;
           axios
               .put('/rest/guest',{
                   "name":name,
