@@ -15,14 +15,14 @@
             <p>我们结婚啦！</p>
             <p><b>谢成炫 & 黄梦祎 </b></p>
             <div v-if="location == 'FUMANLOU'">
-              <p >时间: 2019年8月24日12:00</p>
+              <p >时间: 2019年8月24日12时</p>
               <p>地点: 适中镇中颜小区<b>福满楼</b></p>
             </div>
             <div v-if="location == 'ZHONGYUAN'">
-            <p >时间：2019年8月26日12:00</p>
+            <p >时间：2019年8月26日12时</p>
               <p>地点：龙岩市<b>中元大酒店</b></p>
             </div>
-            <label>邀请您出席：</label>
+            <label>恭请光临: </label>
             <select name="public-choice" v-model="couponSelected" @change="getCouponSelected">
               <option :value="coupon.id" v-for="coupon in couponList" :key="coupon.id" >{{coupon.name}}</option>
             </select>
