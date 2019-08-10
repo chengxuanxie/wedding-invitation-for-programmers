@@ -183,7 +183,7 @@ export default {
                   sendComment(response.data.retMsg);
               })
               .catch(function (error) { // 请求失败处理
-
+                  sendComment('1000')
               });
       }
   }
