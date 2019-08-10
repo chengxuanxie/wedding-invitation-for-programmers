@@ -170,7 +170,7 @@ export default {
         let couponSelected = this.couponSelected;
         var sendComment = this.sendComment;
         if(!name || !wechaId){
-            sendComment('1000')
+            sendComment('1001')
             return;
         }
           axios
